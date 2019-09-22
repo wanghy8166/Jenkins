@@ -1,0 +1,17 @@
+{{ define "wechat.default.message" }}{{ range $i, $alert :=.Alerts }}{{ if eq .Status "firing" -}}========告警通知========
+当前状态:{{ .Status }}
+告警主机:{{ $alert.Labels.instance }}
+告警级别:{{ $alert.Labels.severity }}
+告警类型:{{ $alert.Labels.alertname }}
+告警概要:{{ $alert.Annotations.summary }}
+告警详情:{{ $alert.Annotations.description }}
+当前数值:{{ $alert.Annotations.value }}
+告警时间:{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}{{- end }}{{ if eq .Status "resolved" -}}
+========恢复通知========
+当前状态:{{ .Status }}
+告警主机:{{ $alert.Labels.instance }}
+告警类型:{{ $alert.Labels.alertname }}
+告警概要:{{ $alert.Annotations.summary }}
+当前数值:{{ $alert.Annotations.value }}
+恢复时间:{{ ($alert.EndsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}{{- end }}
+{{ end }}{{ end }}
