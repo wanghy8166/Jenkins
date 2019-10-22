@@ -6,7 +6,7 @@
 告警概要:{{ $alert.Annotations.summary }}
 告警详情:{{ $alert.Annotations.description }}
 当前数值:{{ $alert.Annotations.value }}
-首次告警时间:{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}{{- end }}{{ if eq .Status "resolved" -}}
+首次告警:{{ ($alert.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}{{- end }}{{ if eq .Status "resolved" -}}
 ========恢复通知========
 当前状态:{{ .Status }}
 告警主机:{{ $alert.Labels.instance }}
