@@ -1,5 +1,5 @@
 {{ define "wechat.default.message" }}{{ if gt (len .Alerts.Firing) 0 -}}========告警通知========{{ range .Alerts }}
-告警主机:{{ .Labels.instance }} , {{ .Labels.server }}
+告警主机:{{ .Labels.instance }} , {{ .Labels.server }} , {{ .Labels.exported_instance }}
 告警级别:{{ .Labels.severity }}
 告警类型:{{ .Labels.alertname }}
 告警概要:{{ .Annotations.summary }}
@@ -7,7 +7,7 @@
 当前数值:{{ .Annotations.value }}
 首次告警:{{ (.StartsAt).Format "2006-01-02 15:04:05" }}
 ----------------------{{- end }}{{- end }}{{ if gt (len .Alerts.Resolved) 0 -}}========恢复通知========{{ range .Alerts }}
-告警主机:{{ .Labels.instance }} , {{ .Labels.server }}
+告警主机:{{ .Labels.instance }} , {{ .Labels.server }} , {{ .Labels.exported_instance }}
 告警类型:{{ .Labels.alertname }}
 告警概要:{{ .Annotations.summary }}
 当前数值:{{ .Annotations.value }}
