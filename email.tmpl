@@ -1,0 +1,16 @@
+{{ define "email.to.html" }}
+{{ if gt (len .Alerts.Firing) 0 -}}
+========告警通知======== <br>
+{{ range .Alerts }}
+告警主机:{{ .Labels.instance }} , {{ .Labels.server }} , {{ .Labels.exported_instance }} <br>
+告警概要:{{ .Annotations.summary }} <br>
+告警详情:{{ .Annotations.description }} <br>
+---------------------- <br>
+{{- end }}{{- end }}
+{{ if gt (len .Alerts.Resolved) 0 -}}
+========恢复通知======== <br>
+{{ range .Alerts }}
+告警主机:{{ .Labels.instance }} , {{ .Labels.server }} , {{ .Labels.exported_instance }} <br>
+告警概要:{{ .Annotations.summary }} <br>
+---------------------- <br>
+{{- end }}{{- end }}{{- end }}
