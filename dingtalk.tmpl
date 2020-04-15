@@ -1,4 +1,4 @@
-{{ define "__text_alert_list" }}{{ range . }}主机:{{ .Labels.instance }},{{ .Labels.server }},{{ .Labels.exported_instance }}
+{{ define "__text_alert_list" }}{{ range . }}主机:{{ .Labels.server }}
 详情:{{ .Annotations.description }}
 ====================
 {{ end }}{{ end }}{{ define "ding.link.content" }}{{ if gt (len .Alerts.Firing) 0 }}[{{ .Alerts.Firing | len }}]【告警通知】
