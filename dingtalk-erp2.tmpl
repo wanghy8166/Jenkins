@@ -1,0 +1,14 @@
+{{ define "__text_alert_list1" }}{{ range . }}主机:{{ .Labels.server }}
+详情:{{ .Annotations.description }}
+时间:{{ (.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+====================
+{{ end }}{{ end }}
+{{ define "__text_alert_list2" }}{{ range . }}主机:{{ .Labels.server }}
+详情:{{ .Annotations.description }}
+时间:{{ (.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+恢复:{{ (.EndsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+====================
+{{ end }}{{ end }}
+{{ define "ding.link.content.erp" }}{{ if gt (len .Alerts.Firing) 0 }}[{{ .Alerts.Firing | len }}]【告警通知】
+{{ template "__text_alert_list1" .Alerts.Firing }}{{ end }} {{ if gt (len .Alerts.Resolved) 0 }}[{{ .Alerts.Resolved | len }}]【恢复通知】
+{{ template "__text_alert_list2" .Alerts.Resolved }}{{ end }}{{ end }}
