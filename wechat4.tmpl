@@ -1,0 +1,10 @@
+{{ define "wechat.default.message" }}{{ if gt (len .Alerts.Firing) 0 -}}【告警通知】{{ range .Alerts }}
+主机:{{ .Labels.server }}
+详情:{{ .Annotations.description }}
+时间:{{ (.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+===================={{- end }}{{- end }}{{ if gt (len .Alerts.Resolved) 0 -}}【恢复通知】{{ range .Alerts }}
+主机:{{ .Labels.server }}
+详情:{{ .Annotations.description }}
+时间:{{ (.StartsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+恢复:{{ (.EndsAt.Add 28800e9).Format "2006-01-02 15:04:05" }}
+===================={{- end }}{{- end }}{{- end }}
